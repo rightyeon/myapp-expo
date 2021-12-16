@@ -1,30 +1,35 @@
 
 import React from 'react'
-import {View,Text,StyleSheet,Image, TouchableOpacity} from 'react-native'
+import {View,Text,StyleSheet,Image, TouchableOpacity, ScrollView} from 'react-native'
 
-export default function AboutPage(){
+export default function AboutPage({content, navigation}){
     const aboutImage = "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2FaboutImage.png?alt=media&token=13e1c4f6-b802-4975-9773-e305fc7475c4"
   return (
-    <View style={styles.container}>
-        <Text style={styles.title}>HI! 스파르타코딩 앱개발 반에 오신것을 환영합니다</Text>
-       
-        
-        <View style={styles.textContainer}>
-            <Image style={styles.aboutImage} source={{uri:aboutImage}} resizeMode={"cover"}/>
-            <Text style={styles.desc01}>많은 내용을 간결하게 담아내려 노력했습니다!</Text>
-            <Text style={styles.desc02}>꼭 완주 하셔서 꼭 여러분것으로 만들어가시길 바랍니다</Text>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>여러분의 인스타계정</Text>
-            </TouchableOpacity>
+    <ScrollView style={styles.scrollWrapper}>
+        <View style={styles.container}>
+            <Text style={styles.title}>HI! 스파르타코딩 앱개발 반에 오신것을 환영합니다</Text>
+            <View style={styles.textContainer}>
+                <Image style={styles.aboutImage} source={{uri:aboutImage}} resizeMode={"cover"}/>
+                <Text style={styles.desc01}>많은 내용을 간결하게 담아내려 노력했습니다!</Text>
+                <Text style={styles.desc02}>꼭 완주 하셔서 꼭 여러분것으로 만들어가시길 바랍니다</Text>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>여러분의 인스타계정</Text>
+                </TouchableOpacity>
+            </View>
         </View>
-    </View>)
+    </ScrollView>)
 }
 
 const styles = StyleSheet.create({
+    scrollWrapper : {
+        
+        backgroundColor:"#1F266A",
+    },
     container: {
         flex:1,
         backgroundColor:"#1F266A",
-        alignItems:"center"
+        alignItems:"center",
+        paddingBottom:50
       
     },
     title: {
@@ -32,7 +37,7 @@ const styles = StyleSheet.create({
         fontWeight:"700",
         color:"#fff",
         paddingLeft:30,
-        paddingTop:100,
+        paddingTop:50,
         paddingRight:30
     },
     textContainer: {
