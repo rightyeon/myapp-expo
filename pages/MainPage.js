@@ -37,7 +37,7 @@ export default function MainPage({navigation,route}) {
     //1초 뒤에 실행되는 코드들이 담겨 있는 함수
     setTimeout(()=>{
         firebase_db.ref('/tip').once('value').then((snapshot) => {
-          console.log("파이어베이스에서 데이터 가져왔습니다!!")
+          // console.log("파이어베이스에서 데이터 가져왔습니다!!")
           let tip = snapshot.val();
           
           setState(tip)
@@ -61,9 +61,7 @@ export default function MainPage({navigation,route}) {
       //자바스크립트 함수의 실행순서를 고정하기 위해 쓰는 async,await
       await Location.requestForegroundPermissionsAsync();
       const locationData= await Location.getCurrentPositionAsync();
-      console.log(locationData)
-      console.log(locationData['coords']['latitude'])
-      console.log(locationData['coords']['longitude'])
+      // console.log(locationData)
       const latitude = locationData['coords']['latitude']
       const longitude = locationData['coords']['longitude']
       const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
@@ -71,13 +69,10 @@ export default function MainPage({navigation,route}) {
         `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       );
 
-      console.log(result)
+      // console.log(result)
       const temp = result.data.main.temp; 
       const condition = result.data.weather[0].main
       
-      console.log(temp)
-      console.log(condition)
-
       //오랜만에 복습해보는 객체 리터럴 방식으로 딕셔너리 구성하기!!
       //잘 기억이 안난다면 1주차 강의 6-5를 다시 복습해보세요!
       setWeather({
@@ -126,7 +121,7 @@ export default function MainPage({navigation,route}) {
         <TouchableOpacity style={styles.middleButton03} onPress={()=>{category('반려견')}}><Text style={styles.middleButtonText}>반려견</Text></TouchableOpacity>
         <TouchableOpacity style={styles.middleButton04} onPress={()=>{navigation.navigate('LikePage')}}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
       </ScrollView>
-      <View style={styles.cardContainer}>
+      <View style={styles.cardContainer}> 
          {/* 하나의 카드 영역을 나타내는 View */}
          {
           cateState.map((content,i)=>{

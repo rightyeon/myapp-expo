@@ -6,18 +6,11 @@ import Constants from 'expo-constants';
 
 export default function DetailPage({navigation,route}) {
     let user_idx = Constants.installationId
-    console.log(user_idx)
-    const [tip, setTip] = useState({
-        "idx":9,
-        "category":"재테크",
-        "title":"렌탈 서비스 금액 비교해보기",
-        "image": "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2Frental.png?alt=media&token=97a55844-f077-4aeb-8402-e0a27221570b",
-        "desc":"요즘은 정수기, 공기 청정기, 자동차나 장난감 등 다양한 대여서비스가 활발합니다. 사는 것보다 경제적이라고 생각해 렌탈 서비스를 이용하는 분들이 늘어나고 있는데요. 다만, 이런 렌탈 서비스 이용이 하나둘 늘어나다 보면 그 금액은 겉잡을 수 없이 불어나게 됩니다. 특히, 렌탈 서비스는 빌려주는 물건의 관리비용까지 포함된 것이기에 생각만큼 저렴하지 않습니다. 직접 관리하며 사용할 수 있는 물건이 있는지 살펴보고, 렌탈 서비스 항목에서 제외해보세요. 렌탈 비용과 구매 비용, 관리 비용을 여러모로 비교해보고 고민해보는 것이 좋습니다. ",
-        "date":"2020.09.09"
-    })
-    
+    // console.log(user_idx)
+    const [tip, setTip] = useState([])
+     
     useEffect(()=>{
-        console.log(route)
+        console.log(route); 
         navigation.setOptions({
             title:route.params.title,
             headerStyle: {
@@ -27,7 +20,7 @@ export default function DetailPage({navigation,route}) {
             headerTintColor: "#fff",
         })
         //넘어온 데이터는 route.params에 들어 있습니다.
-        const { idx } = route.params;
+        const { idx } = route.params; 
         firebase_db.ref('/tip/'+idx).once('value').then((snapshot) => {
             let tip = snapshot.val();
             setTip(tip)
@@ -39,8 +32,10 @@ export default function DetailPage({navigation,route}) {
         // like 방 안에
         // 특정 사용자 방안에
         // 특정 찜 데이터 아이디 방안에
-        // 특정 찜 데이터 몽땅 저장!
+        // 특정 찜 데이터 몽땅 저장! (set)
         // 찜 데이터 방 > 사용자 방 > 어떤 찜인지 아이디
+
+        // expo-constants 를 이용해 사용자 고유 아이디를 생성합니다.
         const user_id = Constants.installationId;
         firebase_db.ref('/like/'+user_id+'/'+ tip.idx).set(tip,function(error){
             console.log(error)

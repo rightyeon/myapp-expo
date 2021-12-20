@@ -1,7 +1,21 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Image, Text, StyleSheet,TouchableOpacity, Alert} from 'react-native'
+import {firebase_db} from "../firebaseConfig"
+import Constants from 'expo-constants';
 
-export default function LikeCard({content,navigation}){ 
+
+export default function LikeCard({content,navigation,reload}){
+  const detail = () => {
+    navigation.navigate('DetailPage',{idx:content.idx})
+  }
+
+  const remove = () => {
+      const user_id = Constants.installationId;
+      firebase_db.ref('/like/'+user_id+'/'+content.idx).remove().then(function(){
+         Alert.alert("삭제 완료");
+         reload()
+      })
+  }
     return(
         <View style={styles.cardContainer} onPress={()=>{navigation.navigate('DetailPage',content)}}>
             <View style={styles.card} >
@@ -13,8 +27,8 @@ export default function LikeCard({content,navigation}){
               </View>
             </View>
             <View style={styles.smallContainer}>
-                <TouchableOpacity style={styles.etcBtn}><Text style={styles.etcText}>자세히 보기</Text></TouchableOpacity>
-                <TouchableOpacity style={[styles.etcBtn, styles.left]}><Text style={styles.etcText}>찜 해제</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>detail()} style={styles.etcBtn}><Text style={styles.etcText}>자세히 보기</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>remove()}style={[styles.etcBtn, styles.left]}><Text style={styles.etcText}>찜 해제</Text></TouchableOpacity>
             </View>
         </View>
     )
