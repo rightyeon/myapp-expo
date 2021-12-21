@@ -37,7 +37,7 @@ const StackNavigator = () =>{
 
             {/* 컴포넌트를 페이지로 만들어주는 엘리먼트에 끼워 넣습니다. 이 자체로 이제 페이지 기능을 합니다*/}
             <Stack.Screen name="MainPage" component={MainPage}/>
-            <Stack.Screen name="DetailPage" component={DetailPage}/>
+            <Stack.Screen name="DetailPage" component={DetailPage} options={ {title : '상세 페이지'} }/>
             <Stack.Screen name="LikePage" component={LikePage}  options={ {title : '꿀팁 찜'} }/>
             <Stack.Screen name="AboutPage" component={AboutPage} options={ {title : '소개 페이지'}} />
         </Stack.Navigator>

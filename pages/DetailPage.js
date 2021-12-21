@@ -5,14 +5,11 @@ import {firebase_db} from "../firebaseConfig"
 import Constants from 'expo-constants';
 
 export default function DetailPage({navigation,route}) {
-    let user_idx = Constants.installationId
-    // console.log(user_idx)
-    const [tip, setTip] = useState([])
-     
+    const [tip, setTip] = useState([]) 
     useEffect(()=>{
-        console.log(route); 
         navigation.setOptions({
             title:route.params.title,
+            // title : "String" 으로도 표기할 수 있음
             headerStyle: {
                 backgroundColor: '#000',
                 shadowColor: "#000",
@@ -25,6 +22,7 @@ export default function DetailPage({navigation,route}) {
             let tip = snapshot.val();
             setTip(tip)
         });
+        
     },[])
 
     const like = () => {
@@ -42,13 +40,14 @@ export default function DetailPage({navigation,route}) {
             Alert.alert("찜 완료!")
         });
     }
-
+    // 공유 기능
     const share = () => {
         Share.share({
             message:`${tip.title} \n\n ${tip.desc} \n\n ${tip.image}`,
         });
     }
 
+    // 외부 링크 url 오픈
     const link = () => {
         Linking.openURL("https://spartacodingclub.kr")
     }

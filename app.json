@@ -15,18 +15,24 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
+    ], 
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.myscrapnews.yeon",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9758394544948365~2697604544"
+      }
+    },
+    "android": {
+          "package": "com.myscrapnews.yeon",
+          "versionCode": 1,
+          "config": {
+            "googleMobileAdsAppId": "ca-app-pub-9758394544948365~9382400572"
+          }
+  }
   }
 }
